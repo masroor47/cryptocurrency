@@ -25,4 +25,11 @@ class Blockchain:
         self.chain.append(new_block)
 
     def validate_chain(self):
-        pass
+        for i in range(1, len(self.chain)):
+            current = self.chain[i]
+            previous = self.chain[i-1]
+            if current.hash != current.generate_hash():
+                return False
+            if current.previous_hash != previous.generate_hash():
+                return False
+        return True
